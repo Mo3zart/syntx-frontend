@@ -1,0 +1,26 @@
+/* src/styles/global.css */
+
+:root {
+    --background-color: #f6f8fa; /* Example value, adjust to your needs */
+    --text-color: #24292e;       /* Example value, adjust to your needs */
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Julius Sans One', sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: 'Source Sans Pro', sans-serif;
+}
