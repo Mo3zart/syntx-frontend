@@ -1,4 +1,3 @@
-// src/components/Hero.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useThemeContext } from '../contexts/ThemeContext';
@@ -18,7 +17,7 @@ const Hero: React.FC = () => {
                 color: theme.palette.text.primary,
             }}
         >
-            <h2 style={{ fontSize: '3rem', marginBottom: '1rem', color: theme.typography.h1.color }}>
+            <h2 style={{ fontSize: '3rem', marginBottom: '1rem'}}>
                 Share Your Thoughts in TextTales
             </h2>
             <p
