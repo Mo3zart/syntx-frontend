@@ -24,6 +24,9 @@ const AuthPage: React.FC = () => {
         hasSpecialChar: false,
     });
     const [showPasswordTooltip, setShowPasswordTooltip] = useState(false);
+    const [usernameTouched, setUsernameTouched] = useState(false);
+    const [emailTouched, setEmailTouched] = useState(false);
+    const [passwordTouched, setPasswordTouched] = useState(false);
 
     const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
         setActiveTab(newValue);
@@ -54,8 +57,17 @@ const AuthPage: React.FC = () => {
         setPasswordError(error);
     }, [password]);
 
+    const handleUsernameFocus = () => {
+        setUsernameTouched(true);
+    };
+
+    const handleEmailFocus = () => {
+        setEmailTouched(true);
+    };
+
     const handlePasswordFocus = () => {
         setShowPasswordTooltip(true);
+        setPasswordTouched(true);
     };
 
     const handlePasswordBlur = () => {
@@ -109,12 +121,13 @@ const AuthPage: React.FC = () => {
                             fullWidth
                             margin="normal"
                             value={username}
+                            onFocus={handleUsernameFocus}
                             onChange={(e) => {
                                 setUsername(e.target.value);
                                 setUsernameError(validateUsername(e.target.value));
                             }}
-                            error={Boolean(usernameError)}
-                            helperText={usernameError || 'Username must be at least 3 characters long.'}
+                            error={usernameTouched && Boolean(usernameError)}
+                            helperText={usernameTouched && (usernameError || 'Username is valid!')}
                             required
                         />
                     )}
@@ -124,12 +137,13 @@ const AuthPage: React.FC = () => {
                         fullWidth
                         margin="normal"
                         value={email}
+                        onFocus={handleEmailFocus}
                         onChange={(e) => {
                             setEmail(e.target.value);
                             if (activeTab === 1) setEmailError(validateEmail(e.target.value));  // Only validate email on Sign Up
                         }}
-                        error={Boolean(emailError)}
-                        helperText={emailError || (activeTab === 1 ? 'Please enter a valid email address like user@example.com' : null)}
+                        error={emailTouched && Boolean(emailError)}
+                        helperText={emailTouched && (emailError || (activeTab === 1 ? 'Email is valid!' : null))}
                         required
                     />
                     <Box sx={{ position: 'relative', marginBottom: 1 }}>
@@ -145,8 +159,8 @@ const AuthPage: React.FC = () => {
                             onChange={(e) => {
                                 setPassword(e.target.value);
                             }}
-                            error={Boolean(passwordError)}
-                            helperText={passwordError || (passwordRequirements.minLength && passwordRequirements.hasUppercase && passwordRequirements.hasLowercase && passwordRequirements.hasNumber && passwordRequirements.hasSpecialChar ? 'Password meets all requirements!' : 'Password must meet the requirements below.')}
+                            error={passwordTouched && Boolean(passwordError)}
+                            helperText={passwordTouched && (passwordError || (passwordRequirements.minLength && passwordRequirements.hasUppercase && passwordRequirements.hasLowercase && passwordRequirements.hasNumber && passwordRequirements.hasSpecialChar ? 'Password meets all requirements!' : 'Password must meet the requirements below.'))}
                             required
                             InputProps={{
                                 endAdornment: (
