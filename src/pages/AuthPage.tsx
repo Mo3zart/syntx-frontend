@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useThemeContext } from '../contexts/ThemeContext';
 import { validateEmail, validateUsername, validatePassword } from '../utils/validation';
-import { Container, TextField, Button, Typography, Box, Tabs, Tab, InputAdornment, IconButton, List, ListItem, ListItemIcon, ListItemText, Checkbox } from '@mui/material';
+import { Container, TextField, Button, Typography, Box, Tabs, Tab, InputAdornment, IconButton } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
 const AuthPage: React.FC = () => {
     const { theme } = useThemeContext();
@@ -25,6 +23,7 @@ const AuthPage: React.FC = () => {
         hasNumber: false,
         hasSpecialChar: false,
     });
+    const [showPasswordTooltip, setShowPasswordTooltip] = useState(false);
 
     const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
         setActiveTab(newValue);
@@ -54,6 +53,14 @@ const AuthPage: React.FC = () => {
 
         setPasswordError(error);
     }, [password]);
+
+    const handlePasswordFocus = () => {
+        setShowPasswordTooltip(true);
+    };
+
+    const handlePasswordBlur = () => {
+        setShowPasswordTooltip(false);
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -90,9 +97,6 @@ const AuthPage: React.FC = () => {
                     color: theme.palette.text.primary,
                 }}
             >
-                <Typography variant="h4" component="h2" gutterBottom align="center" sx={{ color: theme.palette.primary.main, fontWeight: 'bold' }}>
-                    {activeTab === 0 ? 'Sign In' : 'Sign Up'}
-                </Typography>
                 <Tabs value={activeTab} onChange={handleTabChange} centered sx={{ marginBottom: 4 }}>
                     <Tab label="Sign In" sx={{ color: theme.palette.primary.main }} />
                     <Tab label="Sign Up" sx={{ color: theme.palette.primary.main }} />
@@ -128,102 +132,79 @@ const AuthPage: React.FC = () => {
                         helperText={emailError || (activeTab === 1 ? 'Please enter a valid email address like user@example.com' : null)}
                         required
                     />
-                    <TextField
-                        label="Password"
-                        type={showPassword ? 'text' : 'password'}
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                        value={password}
-                        onChange={(e) => {
-                            setPassword(e.target.value);
-                        }}
-                        error={Boolean(passwordError)}
-                        helperText={passwordError || 'Password must meet the requirements below.'}
-                        required
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IconButton onClick={togglePasswordVisibility} edge="end">
-                                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                    {activeTab === 1 && (
-                        <>
-                            <List dense sx={{ paddingLeft: 2 }}>
-                                <ListItem>
-                                    <ListItemIcon>
-                                        <Checkbox
-                                            icon={<RadioButtonUncheckedIcon />}
-                                            checkedIcon={<CheckCircleIcon />}
-                                            checked={passwordRequirements.minLength}
-                                            disabled
-                                        />
-                                    </ListItemIcon>
-                                    <ListItemText primary="At least 8 characters long" />
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemIcon>
-                                        <Checkbox
-                                            icon={<RadioButtonUncheckedIcon />}
-                                            checkedIcon={<CheckCircleIcon />}
-                                            checked={passwordRequirements.hasUppercase}
-                                            disabled
-                                        />
-                                    </ListItemIcon>
-                                    <ListItemText primary="At least one uppercase letter" />
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemIcon>
-                                        <Checkbox
-                                            icon={<RadioButtonUncheckedIcon />}
-                                            checkedIcon={<CheckCircleIcon />}
-                                            checked={passwordRequirements.hasLowercase}
-                                            disabled
-                                        />
-                                    </ListItemIcon>
-                                    <ListItemText primary="At least one lowercase letter" />
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemIcon>
-                                        <Checkbox
-                                            icon={<RadioButtonUncheckedIcon />}
-                                            checkedIcon={<CheckCircleIcon />}
-                                            checked={passwordRequirements.hasNumber}
-                                            disabled
-                                        />
-                                    </ListItemIcon>
-                                    <ListItemText primary="At least one number" />
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemIcon>
-                                        <Checkbox
-                                            icon={<RadioButtonUncheckedIcon />}
-                                            checkedIcon={<CheckCircleIcon />}
-                                            checked={passwordRequirements.hasSpecialChar}
-                                            disabled
-                                        />
-                                    </ListItemIcon>
-                                    <ListItemText primary="At least one special character (!@#$%^&*)" />
-                                </ListItem>
-                            </List>
-                        </>
-                    )}
+                    <Box sx={{ position: 'relative', marginBottom: 1 }}>
+                        <TextField
+                            label="Password"
+                            type={showPassword ? 'text' : 'password'}
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            value={password}
+                            onFocus={handlePasswordFocus}
+                            onBlur={handlePasswordBlur}
+                            onChange={(e) => {
+                                setPassword(e.target.value);
+                            }}
+                            error={Boolean(passwordError)}
+                            helperText={passwordError || (passwordRequirements.minLength && passwordRequirements.hasUppercase && passwordRequirements.hasLowercase && passwordRequirements.hasNumber && passwordRequirements.hasSpecialChar ? 'Password meets all requirements!' : 'Password must meet the requirements below.')}
+                            required
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton onClick={togglePasswordVisibility} edge="end">
+                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                        {showPasswordTooltip && !(
+                            passwordRequirements.minLength &&
+                            passwordRequirements.hasUppercase &&
+                            passwordRequirements.hasLowercase &&
+                            passwordRequirements.hasNumber &&
+                            passwordRequirements.hasSpecialChar
+                        ) && (
+                            <Box
+                                sx={{
+                                    position: 'absolute',
+                                    top: 'calc(100% + 5px)',
+                                    left: 0,
+                                    backgroundColor: theme.palette.background.paper,
+                                    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
+                                    padding: 2,
+                                    borderRadius: 2,
+                                    zIndex: 2, // Ensure this is higher than other elements
+                                    width: '300px',
+                                }}
+                            >
+                                <Typography variant="subtitle2" sx={{ color: theme.palette.text.primary, fontWeight: 'bold' }}>
+                                    Password Requirements:
+                                </Typography>
+                                <Typography variant="body2" sx={{ color: theme.palette.text.primary }}>
+                                    - At least 8 characters long<br />
+                                    - At least one uppercase letter<br />
+                                    - At least one lowercase letter<br />
+                                    - At least one number<br />
+                                    - At least one special character (!@#$%^&*-)
+                                </Typography>
+                            </Box>
+                        )}
+                    </Box>
+
                     {activeTab === 1 && (
                         <TextField
                             label="Confirm Password"
                             type={showPassword ? 'text' : 'password'}
                             variant="outlined"
                             fullWidth
-                            margin="normal"
+                            margin="dense" // Use "dense" margin to reduce the space
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             required
                         />
                     )}
+
                     <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
                         {activeTab === 0 ? 'Sign In' : 'Sign Up'}
                     </Button>
