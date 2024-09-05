@@ -77,7 +77,7 @@ const AuthPage: React.FC = () => {
         setShowPasswordTooltip(false);
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (activeTab === 1 && password !== confirmPassword) {
             alert('Passwords do not match!');
@@ -87,13 +87,43 @@ const AuthPage: React.FC = () => {
             alert('Please fix the errors before submitting.');
             return;
         }
-        // Handle sign-in or sign-up logic here
+
+        const endpoint = activeTab === 0 ? 'signin' : 'signup';
+        const url = `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/${endpoint}`;
+        const payload = activeTab === 0
+            ? { username_or_email: email, password }
+            : { username, email, password };
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert(data.message);
+                // Optionally store JWT token to localStorage or handle navigation
+                if (data.access_token) {
+                    localStorage.setItem('access_token', data.access_token);
+                }
+            } else {
+                alert(data.error || 'Error occurred');
+            }
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        } catch (error) {
+            alert('Something went wrong. Please try again.');
+        }
     };
 
-    const handleOAuthSignIn = (provider: string) => {
-        // Redirect user to OAuth provider (e.g., Google, GitHub, Apple)
-        window.location.href = `/auth/${provider}`;
-    };
+    // const handleOAuthSignIn = (provider: string) => {
+    //     // Redirect user to OAuth provider (e.g., Google, GitHub, Apple)
+    //     window.location.href = `/auth/${provider}`;
+    // };
 
     return (
         <Container
@@ -206,32 +236,32 @@ const AuthPage: React.FC = () => {
                     <Grid container spacing={2} justifyContent="center" sx={{ mt: 2 }}>
                         <Grid item>
                             <Button
-                                variant="outlined"
+                                variant="contained"
                                 fullWidth
-                                onClick={() => handleOAuthSignIn('google')}
+                                onClick={() => window.location.href = `${process.env.REACT_APP_BACKEND_URL}/auth/google`}
                                 startIcon={<FaGoogle />}
                             >
-                                Google
+                                Sign in with Google
                             </Button>
                         </Grid>
                         <Grid item>
                             <Button
-                                variant="outlined"
+                                variant="contained"
                                 fullWidth
-                                onClick={() => handleOAuthSignIn('github')}
-                                startIcon={<FaGithub />}
-                            >
-                                GitHub
-                            </Button>
-                        </Grid>
-                        <Grid item>
-                            <Button
-                                variant="outlined"
-                                fullWidth
-                                onClick={() => handleOAuthSignIn('apple')}
+                                onClick={() => window.location.href = `${process.env.REACT_APP_BACKEND_URL}/auth/apple`}
                                 startIcon={<FaApple />}
                             >
-                                Apple
+                                Sign in with Apple
+                            </Button>
+                        </Grid>
+                        <Grid item>
+                            <Button
+                                variant="contained"
+                                fullWidth
+                                onClick={() => window.location.href = `${process.env.REACT_APP_BACKEND_URL}/auth/GitHub`}
+                                startIcon={<FaGithub />}
+                            >
+                                Sign in with GitHub
                             </Button>
                         </Grid>
                     </Grid>
