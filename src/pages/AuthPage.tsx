@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useThemeContext } from '../contexts/ThemeContext';
 import { validateEmail, validateUsername, validatePassword } from '../utils/validation';
-import { Container, TextField, Button, Typography, Box, Tabs, Tab, InputAdornment, IconButton } from '@mui/material';
+import { Container, TextField, Button, Typography, Box, Tabs, Tab, InputAdornment, IconButton, Grid } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
+// Icons for OAuth Providers
+import { FaGoogle, FaGithub, FaApple } from 'react-icons/fa';
 
 const AuthPage: React.FC = () => {
     const { theme } = useThemeContext();
@@ -85,6 +88,11 @@ const AuthPage: React.FC = () => {
             return;
         }
         // Handle sign-in or sign-up logic here
+    };
+
+    const handleOAuthSignIn = (provider: string) => {
+        // Redirect user to OAuth provider (e.g., Google, GitHub, Apple)
+        window.location.href = `/auth/${provider}`;
     };
 
     return (
@@ -172,38 +180,6 @@ const AuthPage: React.FC = () => {
                                 ),
                             }}
                         />
-                        {showPasswordTooltip && !(
-                            passwordRequirements.minLength &&
-                            passwordRequirements.hasUppercase &&
-                            passwordRequirements.hasLowercase &&
-                            passwordRequirements.hasNumber &&
-                            passwordRequirements.hasSpecialChar
-                        ) && (
-                            <Box
-                                sx={{
-                                    position: 'absolute',
-                                    top: 'calc(100% + 5px)',
-                                    left: 0,
-                                    backgroundColor: theme.palette.background.paper,
-                                    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-                                    padding: 2,
-                                    borderRadius: 2,
-                                    zIndex: 2, // Ensure this is higher than other elements
-                                    width: '300px',
-                                }}
-                            >
-                                <Typography variant="subtitle2" sx={{ color: theme.palette.text.primary, fontWeight: 'bold' }}>
-                                    Password Requirements:
-                                </Typography>
-                                <Typography variant="body2" sx={{ color: theme.palette.text.primary }}>
-                                    - At least 8 characters long<br />
-                                    - At least one uppercase letter<br />
-                                    - At least one lowercase letter<br />
-                                    - At least one number<br />
-                                    - At least one special character (!@#$%^&*-)
-                                </Typography>
-                            </Box>
-                        )}
                     </Box>
 
                     {activeTab === 1 && (
@@ -222,6 +198,43 @@ const AuthPage: React.FC = () => {
                     <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
                         {activeTab === 0 ? 'Sign In' : 'Sign Up'}
                     </Button>
+
+                    <Typography variant="body2" align="center" sx={{ mt: 2 }}>
+                        Or sign in with
+                    </Typography>
+
+                    <Grid container spacing={2} justifyContent="center" sx={{ mt: 2 }}>
+                        <Grid item>
+                            <Button
+                                variant="outlined"
+                                fullWidth
+                                onClick={() => handleOAuthSignIn('google')}
+                                startIcon={<FaGoogle />}
+                            >
+                                Google
+                            </Button>
+                        </Grid>
+                        <Grid item>
+                            <Button
+                                variant="outlined"
+                                fullWidth
+                                onClick={() => handleOAuthSignIn('github')}
+                                startIcon={<FaGithub />}
+                            >
+                                GitHub
+                            </Button>
+                        </Grid>
+                        <Grid item>
+                            <Button
+                                variant="outlined"
+                                fullWidth
+                                onClick={() => handleOAuthSignIn('apple')}
+                                startIcon={<FaApple />}
+                            >
+                                Apple
+                            </Button>
+                        </Grid>
+                    </Grid>
                 </Box>
             </Box>
         </Container>
