@@ -1,15 +1,18 @@
 // src/pages/HomePage.tsx
 import React from 'react';
-import Header from '../components/Header';
 import Hero from '../components/Hero';
 import Features from '../components/Features';
+import { useNavigate } from 'react-router-dom';
+
 
 const HomePage: React.FC = () => {
+    const navigate = useNavigate();
+
     return (
         <div>
-            <Header />
-            <Hero />
-            <Features />
+            <Hero/>
+            <Features/>
+            <button onClick={() => navigate('/feed')}>Go to Feed</button>
         </div>
     );
 };
