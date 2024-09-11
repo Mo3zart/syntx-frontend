@@ -62,9 +62,35 @@ const AuthPage: React.FC = () => {
             });
 
             const data = await response.json();
+            console.log('API response data:', data);  // Log the response
 
-            // If signup or login is successful and token is returned
-            if (response.ok && data.access_token) {
+            if (response.ok && activeTab === 1) {
+                // If signing up, immediately log the user in after success
+                console.log('Sign-up successful, logging in...');
+
+                // Perform login with the same credentials
+                const loginResponse = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/signin`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username_or_email: email, password }),
+                });
+
+                const loginData = await loginResponse.json();
+
+                // Ensure token exists in the login response
+                if (loginResponse.ok && loginData.access_token) {
+                    console.log('Token received after login, redirecting...', loginData.access_token);
+
+                    // Store the token and authenticate
+                    login(loginData.access_token);
+
+                    // Redirect to the feed page
+                    navigate('/feed');
+                } else {
+                    setErrorMessage(loginData.error || 'Login after sign-up failed. Please try signing in.');
+                }
+            } else if (response.ok && data.access_token) {
+                // If login is successful
                 console.log('Token received, logging in and redirecting...', data.access_token);
 
                 // Call login to store the token and update isAuthenticated
