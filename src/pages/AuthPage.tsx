@@ -38,10 +38,13 @@ const AuthPage: React.FC = () => {
 
         setErrorMessage(null);
 
+        // If signing up, check if passwords match
         if (activeTab === 1 && password !== confirmPassword) {
             setErrorMessage('Passwords do not match.');
             return;
         }
+
+        // If there are validation errors, don't proceed
         if (emailError || usernameError || passwordError) {
             setErrorMessage('Please fix the errors before submitting.');
             return;
@@ -60,20 +63,21 @@ const AuthPage: React.FC = () => {
 
             const data = await response.json();
 
+            // If signup or login is successful and token is returned
             if (response.ok && data.access_token) {
-                console.log('Token received, redirecting...', data.access_token);
+                console.log('Token received, logging in and redirecting...', data.access_token);
 
-                // Use login function from context to set the token and mark the user as authenticated
+                // Call login to store the token and update isAuthenticated
                 login(data.access_token);
 
-                // Navigate to the feed after authentication
+                // Redirect to the feed page
                 navigate('/feed');
             } else {
                 setErrorMessage(data.error || 'Authentication failed. Please try again.');
             }
         } catch (error) {
             setErrorMessage('An error occurred. Please try again later.');
-            console.error('Sign-in failed: ', error);
+            console.error('Sign-in/Sign-up failed: ', error);
         }
     };
 

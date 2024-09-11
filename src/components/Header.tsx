@@ -2,17 +2,18 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useThemeContext } from '../contexts/ThemeContext';
+import { useAuthContext } from '../contexts/AuthContext';  // Import AuthContext
 import { AppBar, Toolbar, Typography, IconButton, Button } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 const Header: React.FC = () => {
     const { toggleTheme, isDarkMode } = useThemeContext();
+    const { isAuthenticated, logout } = useAuthContext();  // Use AuthContext to check auth state
     const navigate = useNavigate();
-    const token = localStorage.getItem('access_token');  // Check if the user is logged in by looking for the JWT token
 
     const handleLogout = () => {
-        localStorage.removeItem('access_token'); // Remove token to log out
+        logout();  // Call logout from AuthContext
         navigate('/auth');  // Redirect to the sign-in page
     };
 
@@ -27,14 +28,14 @@ const Header: React.FC = () => {
                 <Typography
                     variant="h6"
                     component="div"
-                    sx={{ flexGrow: 1, fontFamily: 'Julius Sans One, sans-serif', color: isDarkMode ? 'rgb(255, 255, 255)' : 'rgb(255, 255, 255)' }}
+                    sx={{ flexGrow: 1, fontFamily: 'Julius Sans One, sans-serif', color: 'rgb(255, 255, 255)' }}
                 >
                     TextTales
                 </Typography>
                 <Link to="/" style={{ margin: '0 1rem', textDecoration: 'none', color: 'inherit' }}>
                     Home
                 </Link>
-                {token ? (
+                {isAuthenticated ? (  // Check if authenticated instead of checking localStorage
                     <>
                         <Button
                             style={{ margin: '0 1rem', textDecoration: 'none', color: 'inherit' }}

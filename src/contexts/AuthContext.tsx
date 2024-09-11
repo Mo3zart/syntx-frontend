@@ -10,8 +10,8 @@ export const useAuthContext = () => useContext(AuthContext);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+    // Check for token in localStorage when the app loads
     useEffect(() => {
-        // Check for token in localStorage when the app loads
         const token = localStorage.getItem('access_token');
         if (token) {
             setIsAuthenticated(true);
