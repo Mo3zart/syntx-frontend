@@ -1,23 +1,31 @@
 // src/App.tsx
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import SignInPage from './pages/SignInPage';
-import SignUpPage from './pages/SignUpPage';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { AuthProvider, useAuthContext } from './contexts/AuthContext'; // Import AuthContext
+import AuthPage from './pages/AuthPage';
+import FeedPage from './pages/FeedPage';
+import UserProfilePage from './pages/UserProfilePage';
+import Navbar from './components/Header';
+import HomePage from './pages/HomePage';
 
 const App: React.FC = () => {
+    const { isAuthenticated } = useAuthContext();  // Get isAuthenticated from context
+
     return (
         <ThemeProvider>
             <Router>
+                <Navbar />
                 <Routes>
                     <Route path="/" element={<HomePage />} />
-                    <Route path="/signin" element={<SignInPage />} />
-                    <Route path="/signup" element={<SignUpPage />} />
+                    <Route path="/feed" element={isAuthenticated ? <FeedPage /> : <Navigate to="/auth" />} />
+                    <Route path="/profile" element={isAuthenticated ? <UserProfilePage /> : <Navigate to="/auth" />} />
+                    <Route path="/auth" element={isAuthenticated ? <Navigate to="/feed" /> : <AuthPage />} />
                 </Routes>
             </Router>
         </ThemeProvider>
     );
 };
 
+// Wrap App component in AuthProvider in main.tsx
 export default App;
