@@ -1,0 +1,72 @@
+/* src/components/Header.css */
+
+/* Ensure the header background and spacing */
+.header {
+    background-color: rgb(78, 49, 170);
+    padding: 0 1.5rem;
+}
+
+/* Clickable logo */
+.header-logo {
+    font-family: 'Bandal', sans-serif;
+    font-size: 1.8rem;
+    color: #ffffff;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: auto;  /* Move Syntx to the left */
+}
+
+.header-links {
+    display: flex;
+    gap: 1rem; /* Add space between links */
+}
+
+/* Link styles for the nav links */
+.header-link {
+    font-family: 'Bandal', sans-serif;
+    font-size: 1.1rem;
+    color: #ffffff;
+    background-color: transparent;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: background-color 0.3s, border 0.3s;
+    cursor: pointer;
+}
+
+/* Hover effect */
+.header-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid #915eff;
+}
+
+/* Active page styling */
+.header-link.active {
+    background-color: #915eff;
+    border: 2px solid #915eff;
+}
+
+/* Adjustments for button links */
+.MuiButton-root {
+    font-family: 'Bandal', sans-serif !important;
+    font-size: 1.1rem !important;
+    color: #ffffff !important;
+    background-color: transparent !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 5px !important;
+    border: 2px solid transparent !important;
+    transition: background-color 0.3s, border 0.3s !important;
+}
+
+.MuiButton-root:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 2px solid #915eff !important;
+}
+
+/* Active page styling for buttons */
+.MuiButton-root.active {
+    background-color: #915eff !important;
+    border: 2px solid #915eff !important;
+}

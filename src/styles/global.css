@@ -1,8 +1,8 @@
 /* src/styles/global.css */
 
 :root {
-    --background-color: #f6f8fa; /* Example value, adjust to your needs */
-    --text-color: #24292e;       /* Example value, adjust to your needs */
+    --background-color: #f6f8fa;
+    --text-color: #24292e;
 }
 
 body {
@@ -10,7 +10,6 @@ body {
     color: var(--text-color);
     font-family: 'Source Sans Pro', sans-serif;
 }
-
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Julius Sans One', sans-serif;
@@ -21,6 +20,16 @@ a {
     text-decoration: none;
 }
 
+/* Update the button styles to use Bandal */
 button {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Bandal', sans-serif;
+    font-size: 1rem;
+    color: #fff;  /* White text for buttons */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Add this to ensure button hover styles are consistent */
+button:hover {
+    color: #fff;
 }

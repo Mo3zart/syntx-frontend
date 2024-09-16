@@ -2,12 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { useThemeContext } from '../contexts/ThemeContext';
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../contexts/AuthContext';  // Import AuthContext
+import { useAuthContext } from '../contexts/AuthContext';
 import { validateEmail, validateUsername, validatePassword } from '../utils/validation';
 import { Container, TextField, Button, Typography, Box, Tabs, Tab, InputAdornment, IconButton, Grid } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { FaGoogle, FaGithub, FaApple } from 'react-icons/fa';
+import './AuthPage.css'; // Import the custom styles
 
 const AuthPage: React.FC = () => {
     const { theme } = useThemeContext();
@@ -183,28 +184,28 @@ const AuthPage: React.FC = () => {
                         />
                     )}
 
-                    <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }}>
+                    <Button type="submit" className="auth-button" fullWidth>
                         {activeTab === 0 ? 'Sign In' : 'Sign Up'}
                     </Button>
 
                     <Typography variant="body2" align="center" sx={{ mt: 2 }}>
-                        Or sign in with
+                        or use
                     </Typography>
 
-                    {/* OAuth Buttons (No functionality yet) */}
+                    {/* OAuth Buttons */}
                     <Grid container spacing={2} justifyContent="center" sx={{ mt: 2 }}>
                         <Grid item>
-                            <Button variant="contained" fullWidth startIcon={<FaGoogle />}>
+                            <Button className="oauth-button" fullWidth startIcon={<FaGoogle />}>
                                 Google
                             </Button>
                         </Grid>
                         <Grid item>
-                            <Button variant="contained" fullWidth startIcon={<FaApple />}>
+                            <Button className="oauth-button" fullWidth startIcon={<FaApple />}>
                                 Apple
                             </Button>
                         </Grid>
                         <Grid item>
-                            <Button variant="contained" fullWidth startIcon={<FaGithub />}>
+                            <Button className="oauth-button" fullWidth startIcon={<FaGithub />}>
                                 GitHub
                             </Button>
                         </Grid>

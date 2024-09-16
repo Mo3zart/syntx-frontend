@@ -1,6 +1,8 @@
 // src/main.tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './styles/fonts.css';
+import './styles/global.css';
 import App from './App';
 import { AuthProvider } from './contexts/AuthContext'; // Wrap with AuthProvider
 

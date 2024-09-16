@@ -1,0 +1,91 @@
+/* src/pages/LandingPage.css */
+
+/* Container for the whole landing page */
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0 2rem;
+}
+
+/* Brand Header */
+.brand-header {
+    margin-bottom: 2rem;
+}
+
+.branding-text {
+    font-family: 'Julius Sans One', sans-serif;
+    font-size: 1.5rem;
+    color: #915eff;
+    text-align: center;
+}
+
+/* Logo section */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+}
+
+/* Subheader */
+.author-name {
+    font-family: 'Julius Sans One', sans-serif;
+    font-size: 1.2rem;
+    color: #915eff;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Button container */
+.button-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* Primary and Secondary buttons */
+.primary-btn, .secondary-btn {
+    font-family: 'Bandal', sans-serif;
+    padding: 0.75rem 2rem;
+    border: 2px solid #915eff;
+    color: #915eff;
+    background-color: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.primary-btn:hover, .secondary-btn:hover {
+    background-color: #915eff;
+    color: #ffffff;
+}
+
+/* Fix contrast for buttons in light mode */
+.light-mode .primary-btn, .light-mode .secondary-btn {
+    background-color: #ffffff;
+    color: #915eff;
+}
+
+.light-mode .primary-btn:hover, .light-mode .secondary-btn:hover {
+    background-color: #915eff;
+    color: #ffffff;
+}
+
+/* Adjustments for dark mode */
+.dark-mode .primary-btn, .dark-mode .secondary-btn {
+    background-color: transparent;
+    color: #915eff;
+}
+
+.dark-mode .primary-btn:hover, .dark-mode .secondary-btn:hover {
+    background-color: #915eff;
+    color: #ffffff;
+}

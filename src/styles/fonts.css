@@ -1,0 +1,21 @@
+/* src/styles/fonts.css */
+
+/* Import the Bandal font from assets */
+@font-face {
+    font-family: 'Bandal';
+    src: url('/assets/fonts/Bandal.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* You can also add any Google fonts or other web fonts here if needed */
+@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
+
+/* Default global styles */
+body, html {
+    font-family: 'Julius Sans One', sans-serif; /* Default font for body */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
