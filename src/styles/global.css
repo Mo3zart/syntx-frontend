@@ -24,12 +24,14 @@ a {
 button {
     font-family: 'Bandal', sans-serif;
     font-size: 1rem;
-    color: #fff;  /* White text for buttons */
     text-transform: uppercase;
     letter-spacing: 1px;
+    cursor: pointer;
+    color: #ffffff !important;
 }
 
 /* Add this to ensure button hover styles are consistent */
 button:hover {
-    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 6px rgba(145, 94, 255, 0.4);
 }

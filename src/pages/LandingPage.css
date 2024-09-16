@@ -36,7 +36,7 @@
 }
 
 /* Subheader */
-.author-name {
+.catchphrase {
     font-family: 'Julius Sans One', sans-serif;
     font-size: 1.2rem;
     color: #915eff;
@@ -56,36 +56,19 @@
     font-family: 'Bandal', sans-serif;
     padding: 0.75rem 2rem;
     border: 2px solid #915eff;
-    color: #915eff;
     background-color: transparent;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+    gap: 0.5rem;
+
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
 .primary-btn:hover, .secondary-btn:hover {
-    background-color: #915eff;
-    color: #ffffff;
-}
-
-/* Fix contrast for buttons in light mode */
-.light-mode .primary-btn, .light-mode .secondary-btn {
-    background-color: #ffffff;
-    color: #915eff;
-}
-
-.light-mode .primary-btn:hover, .light-mode .secondary-btn:hover {
-    background-color: #915eff;
-    color: #ffffff;
+    box-shadow: 0 4px 6px rgba(145, 94, 255, 0.4);
 }
 
 /* Adjustments for dark mode */
 .dark-mode .primary-btn, .dark-mode .secondary-btn {
-    background-color: transparent;
     color: #915eff;
-}
-
-.dark-mode .primary-btn:hover, .dark-mode .secondary-btn:hover {
-    background-color: #915eff;
-    color: #ffffff;
 }

@@ -15,7 +15,7 @@ const LandingPage: React.FC = () => {
                 <img src={logoSrc} alt="Syntx Logo" className="logo" />
             </div>
 
-            <p className="author-name">The Future of Blogging</p>
+            <p className="catchphrase">The Future of Blogging</p>
 
             <div className="button-container">
                 <button className="primary-btn">Sign Up</button>

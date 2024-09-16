@@ -184,28 +184,30 @@ const AuthPage: React.FC = () => {
                         />
                     )}
 
-                    <Button type="submit" className="auth-button" fullWidth>
-                        {activeTab === 0 ? 'Sign In' : 'Sign Up'}
+                    <Button type="submit" className="auth-button" fullWidth sx={{border: '2px solid #915eff !important',}}>
+                        {activeTab === 0 ? 'Log In' : 'Sign Up'}
                     </Button>
 
                     <Typography variant="body2" align="center" sx={{ mt: 2 }}>
-                        or use
+                        {activeTab === 0 ? 'Log In with' : 'Sign Up with'}
                     </Typography>
 
                     {/* OAuth Buttons */}
                     <Grid container spacing={2} justifyContent="center" sx={{ mt: 2 }}>
                         <Grid item>
-                            <Button className="oauth-button" fullWidth startIcon={<FaGoogle />}>
+                            <Button className="oauth-button" fullWidth sx={{border: '2px solid #915eff !important',}} startIcon={<FaGoogle />}>
                                 Google
                             </Button>
                         </Grid>
                         <Grid item>
-                            <Button className="oauth-button" fullWidth startIcon={<FaApple />}>
+                            <Button className="oauth-button" fullWidth sx={{border: '2px solid #915eff !important',}} startIcon={<FaApple />}>
                                 Apple
                             </Button>
                         </Grid>
                         <Grid item>
-                            <Button className="oauth-button" fullWidth startIcon={<FaGithub />}>
+                            <Button className="oauth-button" fullWidth
+                                    sx={{border: '2px solid #915eff !important',}}
+                                    startIcon={<FaGithub />}>
                                 GitHub
                             </Button>
                         </Grid>
