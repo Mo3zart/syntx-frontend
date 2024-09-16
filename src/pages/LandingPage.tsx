@@ -1,5 +1,6 @@
 import React from 'react';
 import './LandingPage.css';
+import { useNavigate } from 'react-router-dom';
 
 const generateStars = (count: number) => {
     const stars = [];
@@ -30,6 +31,7 @@ const generateMeteorites = (count: number) => {
 const LandingPage: React.FC = () => {
     // Always use the dark mode logo
     const logoSrc = '/assets/syntx-tp-logo-white.png';
+    const navigate = useNavigate();
 
     return (
         <div className="landing-container dark-mode">
@@ -54,8 +56,8 @@ const LandingPage: React.FC = () => {
 
             {/* Buttons */}
             <div className="button-container">
-                <button className="primary-btn">Sign Up</button>
-                <button className="secondary-btn">Log In</button>
+                <button onClick={() => navigate('/auth')} className="primary-btn">Sign Up</button>
+                <button onClick={() => navigate('/auth')} className="secondary-btn">Log In</button>
             </div>
         </div>
     );

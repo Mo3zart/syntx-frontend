@@ -53,7 +53,7 @@ const AuthPage: React.FC = () => {
 
         const endpoint = activeTab === 0 ? 'signin' : 'signup';
         const payload = activeTab === 0 ? { username_or_email: email, password } : { username, email, password };
-        const url = `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/${endpoint}`;
+        const url = `${import.meta.env.VITE_REACT_APP_BACKEND_URL_AUTH}/${endpoint}`;
 
         try {
             const response = await fetch(url, {
