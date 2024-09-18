@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Button } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, Container } from '@mui/material';
 import './Header.css';  // Keep the custom CSS
 
 const Header: React.FC = () => {
@@ -13,26 +13,29 @@ const Header: React.FC = () => {
     };
 
     return (
-        <AppBar position="sticky" style={{ backgroundColor: 'rgb(78, 49, 170)' }}>
-            <Toolbar>
-                {/* Wrap the Syntx text in a Link to the home/landing page */}
-                <Typography variant="h6" component="div" className="header-logo" sx={{ flexGrow: 1 }}>
-                    <Link to="/" className="header-link">Syntx</Link>
-                </Typography>
-                <Link to="/" className="header-link">Home</Link>
-                {token ? (
-                    <>
-                        <Button className="header-link" onClick={() => navigate('/profile')}>
-                            Profile
-                        </Button>
-                        <Button className="header-link" onClick={handleLogout}>
-                            Logout
-                        </Button>
-                    </>
-                ) : (
-                    <Link to="/auth" className="header-link">Sign In</Link>
-                )}
-            </Toolbar>
+        <AppBar position="sticky" className="header" style={{ backgroundColor: 'rgb(78, 49, 170)' }}>
+            {/* Container to limit the width and centralize content */}
+            <Container maxWidth="lg">
+                <Toolbar disableGutters>
+                    {/* Wrap the Syntx text in a Link to the home/landing page */}
+                    <Typography variant="h6" component="div" className="header-logo" sx={{ flexGrow: 1 }}>
+                        <Link to="/" className="header-link">Syntx</Link>
+                    </Typography>
+                    <Link to="/" className="header-link">Home</Link>
+                    {token ? (
+                        <>
+                            <Button className="header-link" onClick={() => navigate('/profile')}>
+                                Profile
+                            </Button>
+                            <Button className="header-link" onClick={handleLogout}>
+                                Logout
+                            </Button>
+                        </>
+                    ) : (
+                        <Link to="/auth" className="header-link">Sign In</Link>
+                    )}
+                </Toolbar>
+            </Container>
         </AppBar>
     );
 };

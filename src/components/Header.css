@@ -3,7 +3,7 @@
 /* Ensure the header background and spacing */
 .header {
     background-color: rgb(78, 49, 170);
-    padding: 0 1.5rem;
+    padding: 0;
 }
 
 /* Clickable logo */
@@ -14,9 +14,9 @@
     letter-spacing: 1.5px;
     text-decoration: none;
     cursor: pointer;
-    margin-right: auto;  /* Move Syntx to the left */
 }
 
+/* Adjust links inside the header */
 .header-links {
     display: flex;
     gap: 1rem; /* Add space between links */
