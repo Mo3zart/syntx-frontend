@@ -1,5 +1,7 @@
 /* src/styles/global.css */
 
+@import 'flowbite';
+
 :root {
     --background-color: #f6f8fa;
     --text-color: #24292e;

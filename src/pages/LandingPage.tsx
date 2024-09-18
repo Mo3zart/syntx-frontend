@@ -1,6 +1,7 @@
 import React from 'react';
 import './LandingPage.css';
 import { useNavigate } from 'react-router-dom';
+import Footer from "../components/Footer"; // Social Icons
 
 const generateStars = (count: number) => {
     const stars = [];
@@ -29,18 +30,17 @@ const generateMeteorites = (count: number) => {
 };
 
 const LandingPage: React.FC = () => {
-    // Always use the dark mode logo
-    const logoSrc = '/assets/syntx-tp-logo-white.png';
+    const logoSrcWhite = '/assets/syntx-tp-logo-white.png';
     const navigate = useNavigate();
 
     return (
         <div className="landing-container dark-mode">
             {/* Stars and Meteorites */}
             <div className="stars-container">
-                {generateStars(100)} {/* Generate 100 stars */}
+                {generateStars(150)} {/* More stars */}
             </div>
             <div className="meteorites-container">
-                {generateMeteorites(5)} {/* Generate 5 meteorites */}
+                {generateMeteorites(7)} {/* Meteorites */}
             </div>
 
             {/* Branding and Logo */}
@@ -49,7 +49,7 @@ const LandingPage: React.FC = () => {
             </div>
 
             <div className="logo-container">
-                <img src={logoSrc} alt="Syntx Logo" className="logo" />
+                <img src={logoSrcWhite} alt="Syntx Logo" className="logo" />
             </div>
 
             <p className="catchphrase">The Future of Blogging</p>
@@ -59,6 +59,34 @@ const LandingPage: React.FC = () => {
                 <button onClick={() => navigate('/auth')} className="primary-btn">Sign Up</button>
                 <button onClick={() => navigate('/auth')} className="secondary-btn">Log In</button>
             </div>
+
+            {/* Features Section */}
+            <section className="features-section">
+                <h2 className="section-title">Why Choose Syntx?</h2>
+                <div className="features-container">
+                    <div className="feature-card">
+                        <h3 className="feature-title">Easy Content Creation</h3>
+                        <p className="feature-description">
+                            Create, edit, and publish blogs with an intuitive and user-friendly interface.
+                        </p>
+                    </div>
+                    <div className="feature-card">
+                        <h3 className="feature-title">Seamless Sharing</h3>
+                        <p className="feature-description">
+                            Share your blogs easily across platforms with built-in social sharing tools.
+                        </p>
+                    </div>
+                    <div className="feature-card">
+                        <h3 className="feature-title">Fast & Secure</h3>
+                        <p className="feature-description">
+                            Experience fast load times and security features designed to keep your content safe.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            {/* Footer Section */}
+            <Footer />
         </div>
     );
 };
