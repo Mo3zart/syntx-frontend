@@ -16,6 +16,27 @@
     cursor: pointer;
 }
 
+.header-avatar {
+    margin-left: 1rem; /* Space between the icon and other elements */
+}
+
+/* General header styling for links */
+.header-link {
+    font-family: 'Bandal', sans-serif;
+    font-size: 1.1rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Styling for dropdown menu items */
+.MuiMenuItem-root {
+    font-family: 'Bandal', sans-serif;
+    font-size: 1rem;
+}
+
 /* Adjust links inside the header */
 .header-links {
     display: flex;
