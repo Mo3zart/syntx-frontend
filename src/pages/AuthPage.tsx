@@ -50,7 +50,7 @@ const AuthPage: React.FC = () => {
             return;
         }
 
-        const endpoint = activeTab === 0 ? 'signin' : 'signup';
+        const endpoint = activeTab === 0 ? 'login' : 'signup';
         const payload = activeTab === 0 ? { username_or_email: email, password } : { username, email, password };
         const url = `${import.meta.env.VITE_REACT_APP_BACKEND_URL_AUTH}/${endpoint}`;
 
@@ -83,7 +83,7 @@ const AuthPage: React.FC = () => {
             }
         } catch (error) {
             setErrorMessage('An error occurred. Please try again later.');
-            console.error('Sign-in/Sign-up failed: ', error);
+            console.error('Login/Sign-up failed: ', error);
         }
     };
 
@@ -109,7 +109,7 @@ const AuthPage: React.FC = () => {
                 }}
             >
                 <Tabs value={activeTab} onChange={(_, newValue) => setActiveTab(newValue)} centered>
-                    <Tab label="Sign In" />
+                    <Tab label="Login" />
                     <Tab label="Sign Up" />
                 </Tabs>
 
