@@ -56,8 +56,7 @@ const LandingPage: React.FC = () => {
 
             {/* Buttons */}
             <div className="button-container">
-                <button onClick={() => navigate('/auth')} className="primary-btn">Sign Up</button>
-                <button onClick={() => navigate('/auth')} className="secondary-btn">Log In</button>
+                <button onClick={() => navigate('/auth')} className="primary-btn">Get Started</button>
             </div>
 
             {/* Features Section */}
