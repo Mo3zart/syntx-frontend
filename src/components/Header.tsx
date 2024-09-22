@@ -17,8 +17,9 @@ const Header: React.FC = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('access_token'); // Remove token to log out
-        navigate('/auth');  // Redirect to the sign-in page
+        navigate('/');  // Redirect to the sign-in page
         handleMenuClose();
+        window.location.reload();
     };
 
     const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
