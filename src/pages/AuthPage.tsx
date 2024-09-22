@@ -1,4 +1,3 @@
-// src/pages/AuthPage.tsx
 import React, { useState, useEffect } from 'react';
 import { useThemeContext } from '../contexts/ThemeContext';
 import { useNavigate } from 'react-router-dom';
@@ -63,6 +62,12 @@ const AuthPage: React.FC = () => {
             });
 
             const data = await response.json();
+
+            if (!response.ok) {
+                // Set error message from backend if exists, otherwise a default error message
+                setErrorMessage(data.message || 'Authentication failed. Please try again.');
+                return;
+            }
 
             // If signup or login is successful and token is returned
             if (response.ok && data.access_token) {
