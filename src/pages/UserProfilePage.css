@@ -1,0 +1,21 @@
+/* src/pages/UserProfilePage.css */
+
+.auth-button {
+    background-color: #915eff;
+    border: 2px solid #915eff !important;
+    color: white;
+    font-weight: bold;
+    padding: 0.75rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.auth-button:hover {
+    background-color: #7d4cdb;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+}
